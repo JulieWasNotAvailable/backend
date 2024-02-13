@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CategoryModule } from './category/category.module';
 import { getPostgresConfig } from './configs/postgres.configs';
 import { PromoModule } from './promo/promo.module';
-import { CategoryModule } from './category/category.module';
+import { DecorationsModule } from './decorations/decorations.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CategoryModule } from './category/category.module';
     }),
     CategoryModule,
     PromoModule,
+    DecorationsModule,
   ],
   controllers: [],
   providers: [],

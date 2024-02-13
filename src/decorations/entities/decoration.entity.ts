@@ -5,8 +5,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('category')
-export class CategoryEntity {
+@Entity('decoration')
+export class DecorationEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
