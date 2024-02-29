@@ -25,7 +25,7 @@ export class PromoController {
 
   @Post()
   @ApiConsumes('multipart/form-data') //всё, что с апи - относитсяк сваггеру, мультипарт - специальный тип в протоколе, чтобы приклерплять файлы на стороне клиенат
-  @UseInterceptors(FileInterceptor('image', { storage: fileStorage }))
+  @UseInterceptors(FileInterceptor('image', { storage: fileStorage })) //"file interceptor" get the image from "image" field and sends it to a custom file storage
   create(
     @Body() dto: CreatePromoDto,
     @UploadedFile() image: Express.Multer.File,

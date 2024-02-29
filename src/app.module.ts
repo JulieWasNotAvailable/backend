@@ -6,6 +6,7 @@ import { CategoryModule } from './category/category.module';
 import { getPostgresConfig } from './configs/postgres.configs';
 import { PromoModule } from './promo/promo.module';
 import { DecorationsModule } from './decorations/decorations.module';
+import { KitchensModule } from './kitchens/kitchens.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { DecorationsModule } from './decorations/decorations.module';
     CategoryModule,
     PromoModule,
     DecorationsModule,
+    KitchensModule,
   ],
   controllers: [],
   providers: [],

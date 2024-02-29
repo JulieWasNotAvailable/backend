@@ -16,10 +16,13 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
+  //private, readonly - categoryService property can only be accessed within the class and cannot be modified after it is initialized
 
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
+    //this - It references the object that is executing the current function
+    //this - category controller in our case
   }
 
   @Get()

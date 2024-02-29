@@ -6,4 +6,4 @@ export class CreateDecorationDto {
 
   @IsNumber()
   caterogyId: number;
-}
+} //this thing is creates a validator, that checks if fields are strings or numbers
