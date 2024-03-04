@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { DeleteResult, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as fs from 'fs';
 
@@ -57,7 +57,7 @@ export class PromoService {
     return this.repository.findOneBy({ id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} promo`;
+  async delete(id: number) {
+    return this.repository.delete({ id });
   }
 }

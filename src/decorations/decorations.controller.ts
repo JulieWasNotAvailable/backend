@@ -6,11 +6,16 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { DecorationService } from './decorations.service';
 import { CreateDecorationDto } from './dto/create-decoration.dto';
 import { UpdateDecorationDto } from './dto/update-decoration.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { fileStorage } from './storage';
+import { DecorationEntity } from './entities/decoration.entity';
 
 @ApiTags('decorations')
 @Controller('decorations')
@@ -18,8 +23,13 @@ export class DecorationsController {
   constructor(private readonly decorationsService: DecorationService) {}
 
   @Post()
-  create(@Body() createDecorationDto: CreateDecorationDto) {
-    return this.decorationsService.create(createDecorationDto);
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('image', { storage: fileStorage }))
+  create(
+    @Body() dto: CreateDecorationDto,
+    @UploadedFile() image: Express.Multer.File,
+  ): Promise<DecorationEntity> {
+    return this.decorationsService.create(dto, image);
   }
 
   @Get()
@@ -33,11 +43,14 @@ export class DecorationsController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('image', { storage: fileStorage }))
   update(
     @Param('id') id: string,
-    @Body() updateDecorationDto: UpdateDecorationDto,
-  ) {
-    return this.decorationsService.update(+id, updateDecorationDto);
+    @Body() dto: UpdateDecorationDto,
+    @UploadedFile() image: Express.Multer.File,
+  ): Promise<DecorationEntity> {
+    return this.decorationsService.update(+id, dto, image);
   }
 
   @Delete(':id')

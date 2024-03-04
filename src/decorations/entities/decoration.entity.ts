@@ -1,10 +1,11 @@
 import { CategoryEntity } from 'src/category/entities/category.entity';
+import { KitchenEntity } from 'src/kitchens/entities/kitchen.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -14,14 +15,25 @@ export class DecorationEntity {
   id: number;
 
   @Column()
-  name: string;
+  image: string;
 
-  @CreateDateColumn({ type: 'timestamp' })
-  createdAt: Date;
+  @Column() //name of the item
+  colour: string;
 
-  @ManyToOne(() => CategoryEntity, (category) => category.decoration, {
-    eager: true,
-  })
-  @JoinColumn() //id подставится автоматом
-  category: CategoryEntity;
+  @Column()
+  material: string; //дсп, лспд, эмаль и тд
+
+  // @CreateDateColumn({ type: 'timestamp' })
+  // createdAt: Date;
+
+  @Column()
+  description: string;
+
+  @OneToMany(() => KitchenEntity, (kitchen) => kitchen.decoration)
+  @JoinColumn()
+  kitchen: KitchenEntity[];
+
+  @OneToMany(() => KitchenEntity, (kitchen) => kitchen.decoration)
+  @JoinColumn()
+  kitchen_2: KitchenEntity[];
 }

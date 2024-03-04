@@ -20,7 +20,7 @@ export class KitchensService {
     return this.repository.save({
       image: image.filename,
       title: dto.title,
-      description: dto.kitchen_description,
+      kitchen_description: dto.kitchen_description,
       corpus_description: dto.corpus_description,
       facade_description: dto.facade_description,
       length: dto.length,

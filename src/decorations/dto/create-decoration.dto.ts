@@ -1,9 +1,27 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString } from 'class-validator';
 
 export class CreateDecorationDto {
-  @IsString()
-  name: string;
+  @ApiProperty({
+    type: 'file',
+    properties: {
+      file: {
+        type: 'string',
+        format: 'binary',
+      },
+    },
+  })
+  image: Express.Multer.File;
 
-  @IsNumber()
-  caterogyId: number;
-} //this thing is creates a validator, that checks if fields are strings or numbers
+  @IsString()
+  colour: string;
+
+  @IsString()
+  material: string; //здесь нужно сделать ограниченное число доступных элементов
+
+  @IsString()
+  description: string; //странные символы в стринге
+
+  // @IsNumber()
+  // caterogyId: number;
+}

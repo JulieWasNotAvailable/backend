@@ -62,6 +62,6 @@ export class PromoController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.promoService.remove(+id);
+    return this.promoService.delete(+id);
   }
 }

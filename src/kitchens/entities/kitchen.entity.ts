@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { DecorationEntity } from 'src/decorations/entities/decoration.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('kitchen')
 export class KitchenEntity {
@@ -15,17 +22,29 @@ export class KitchenEntity {
   kitchen_description: string;
 
   @Column()
-  corpus_description: string; //material&colour
+  corpus_description: number; //material&colour
 
   @Column()
-  facade_description: string; //material and colour
+  facade_description: number; //material and colour
 
   @Column()
   length: number; //стринг формат потому что в макете указаны метры
 
-  @Column({ nullable: true })
+  @Column()
   old_price: number;
 
   @Column()
   new_price: number;
+
+  @ManyToOne(() => DecorationEntity, (decoration) => decoration.kitchen, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'corpus_description' })
+  decoration: DecorationEntity;
+
+  @ManyToOne(() => DecorationEntity, (decoration) => decoration.kitchen, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'facade_description' })
+  decoration_2: DecorationEntity;
 }

@@ -1,23 +1,32 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNumber, IsString } from 'class-validator';
 
 export class CreateKitchenDto {
+  @ApiProperty({
+    type: 'file',
+    properties: {
+      file: {
+        type: 'string',
+        format: 'binary',
+      },
+    },
+  })
+  image: Express.Multer.File;
+
   @IsString()
   title: string;
 
   @IsString()
-  image: string;
+  kitchen_description: string;
 
-  @IsString()
-  corpus_description: string; //material&colour
+  @IsNumber()
+  corpus_description: number; //material&colour
 
-  @IsString()
-  facade_description: string; //material&colour
+  @IsNumber()
+  facade_description: number; //material&colour
 
   @IsNumber()
   length: number;
-
-  @IsString()
-  kitchen_description: string;
 
   @IsNumber()
   old_price: number;

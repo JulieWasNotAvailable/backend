@@ -20,8 +20,8 @@ export class CategoryEntity {
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @ApiHideProperty()
-  @OneToMany(() => DecorationEntity, (decoration) => decoration.category)
-  products: DecorationEntity[];
-  decoration: any;
+  // @ApiHideProperty()
+  // @OneToMany(() => DecorationEntity, (decoration) => decoration.category)
+  // products: DecorationEntity[];
+  // decoration: any;
 }
