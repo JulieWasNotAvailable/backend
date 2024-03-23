@@ -6,6 +6,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../user/user.service';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import { UserEntity } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -15,15 +16,14 @@ export class AuthService {
   ) {}
 
   async validateUser(username: string, password: string): Promise<any> {
-    //to retrieve user and verify password
     const user = await this.usersService.findByUsername(username);
-
-    if (user && user.password === password) {
-      const { password, ...result } = user; //...result to srtip the password property from the user object
-      return result;
+    if (user?.password !== password) {
+      throw new UnauthorizedException();
     }
-
-    return null;
+    const payload = { sub: user.userId, username: user.username };
+    return {
+      access_token: await this.jwtService.signAsync(payload),
+    };
   }
 
   async register(dto: CreateUserDto) {
@@ -37,14 +37,9 @@ export class AuthService {
     }
   }
 
-  async login(user: any) {
-    // const user = await this.usersService.findByUsername(username);
-    // if (user?.password !== pass) {
-    //   throw new UnauthorizedException();
-    // }
-    const payload = { username: user.username, sub: user.userId };
+  async login(user: UserEntity) {
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      token: this.jwtService.sign({ id: user.userId }),
     };
   }
 }
