@@ -9,6 +9,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('School X - OpenAPI 3.0')
     .setDescription(
       `[The source API definition (json)](http://${process.env.SERVER}:${process.env.PORT}/api-json)`,

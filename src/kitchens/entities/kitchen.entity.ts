@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
 } from 'typeorm';
 
 @Entity('kitchen')
@@ -47,4 +48,7 @@ export class KitchenEntity {
   })
   @JoinColumn({ name: 'facade_description' })
   decoration_2: DecorationEntity;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdDate: Date;
 }

@@ -10,7 +10,7 @@ import * as fs from 'fs';
 export class KitchensService {
   constructor(
     @InjectRepository(KitchenEntity)
-    private repository: Repository<KitchenEntity>
+    private repository: Repository<KitchenEntity>,
   ) {}
 
   async create(

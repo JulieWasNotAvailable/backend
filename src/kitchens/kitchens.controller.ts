@@ -24,7 +24,7 @@ export class KitchensController {
 
   @Post()
   @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('image', { storage: fileStorage })) //"file interceptor" get the image from "image" field and sends it to a custom file storage
+  @UseInterceptors(FileInterceptor('image', { storage: fileStorage })) //"file interceptor" gets the image from "image" field and sends it to a custom file storage
   create(
     @Body() dto: CreateKitchenDto,
     @UploadedFile() image: Express.Multer.File,

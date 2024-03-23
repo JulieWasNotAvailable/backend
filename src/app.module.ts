@@ -2,11 +2,14 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { CategoryModule } from './category/category.module';
 import { getPostgresConfig } from './configs/postgres.configs';
-import { PromoModule } from './promo/promo.module';
 import { DecorationsModule } from './decorations/decorations.module';
 import { KitchensModule } from './kitchens/kitchens.module';
+import { UsersModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { ModsModule } from './mods/mods.module';
+import { CartModule } from './mods_cart/mods_cart.module';
+// import { HelpModule } from './help/help.module';
 
 @Module({
   imports: [
@@ -18,10 +21,13 @@ import { KitchensModule } from './kitchens/kitchens.module';
       inject: [ConfigService],
       useFactory: getPostgresConfig,
     }),
-    CategoryModule,
-    PromoModule,
     DecorationsModule,
     KitchensModule,
+    UsersModule,
+    AuthModule,
+    ModsModule,
+    CartModule,
+    // HelpModule,
   ],
   controllers: [],
   providers: [],

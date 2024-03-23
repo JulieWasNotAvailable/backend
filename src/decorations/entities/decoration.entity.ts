@@ -1,4 +1,3 @@
-import { CategoryEntity } from 'src/category/entities/category.entity';
 import { KitchenEntity } from 'src/kitchens/entities/kitchen.entity';
 import {
   Column,
@@ -23,9 +22,6 @@ export class DecorationEntity {
   @Column()
   material: string; //дсп, лспд, эмаль и тд
 
-  // @CreateDateColumn({ type: 'timestamp' })
-  // createdAt: Date;
-
   @Column()
   description: string;
 
@@ -36,4 +32,7 @@ export class DecorationEntity {
   @OneToMany(() => KitchenEntity, (kitchen) => kitchen.decoration)
   @JoinColumn()
   kitchen_2: KitchenEntity[];
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdDate: Date;
 }

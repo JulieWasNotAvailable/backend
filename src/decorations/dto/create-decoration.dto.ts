@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateDecorationDto {
   @ApiProperty({
@@ -21,7 +21,4 @@ export class CreateDecorationDto {
 
   @IsString()
   description: string; //странные символы в стринге
-
-  // @IsNumber()
-  // caterogyId: number;
 }
