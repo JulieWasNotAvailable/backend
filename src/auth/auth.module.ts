@@ -9,7 +9,6 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 import * as dotenv from 'dotenv';
-import { UsersService } from 'src/user/user.service';
 dotenv.config();
 
 @Module({

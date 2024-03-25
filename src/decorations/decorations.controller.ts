@@ -22,13 +22,13 @@ import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
 @ApiBearerAuth()
+@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiTags('decorations')
 @Controller('decorations')
 export class DecorationsController {
   constructor(private readonly decorationsService: DecorationService) {}
 
-  @UseGuards(JwtAuthGuard, RolesGuard) //:)
-  @Roles(['admin']) //Role['admin'] - string datatype with the value admin
+  @Roles(['admin'])
   @Post()
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('image', { storage: fileStorage }))
@@ -39,16 +39,19 @@ export class DecorationsController {
     return this.decorationsService.create(dto, image);
   }
 
+  @Roles(['user', 'admin'])
   @Get()
   findAll() {
     return this.decorationsService.findAll();
   }
 
+  @Roles(['user', 'admin'])
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.decorationsService.findOne(+id);
   }
 
+  @Roles(['admin'])
   @Patch(':id')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('image', { storage: fileStorage }))
@@ -60,6 +63,7 @@ export class DecorationsController {
     return this.decorationsService.update(+id, dto, image);
   }
 
+  @Roles(['admin'])
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.decorationsService.delete(+id);

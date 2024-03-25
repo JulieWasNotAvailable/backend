@@ -2,7 +2,6 @@ import {
   BadRequestException,
   ForbiddenException,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../user/user.service';
@@ -23,7 +22,7 @@ export class AuthService {
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
-    } //вернули всё, кроме пароля
+    }
     return null;
   }
 
