@@ -6,16 +6,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 // import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 // import { UserId } from '../decorators/user-id.decorator';
 import { UserEntity } from './entities/user.entity';
+import { UserId } from 'src/decorators/user-id.decorator';
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get(':id')
-  // @ApiBearerAuth()
-  // @UseGuards(JwtAuthGuard)
-  findById(@Param('userId') id: number) {
+  @Get('me')
+  findById(@UserId() id: number) {
     return this.usersService.findById(id);
   }
 

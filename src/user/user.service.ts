@@ -23,7 +23,6 @@ export class UsersService {
     return this.repository.save({
       username: dto.username,
       password: dto.password,
-      email: dto.email,
     });
   }
 

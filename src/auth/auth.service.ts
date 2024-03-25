@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   UnauthorizedException,
@@ -15,22 +16,26 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
+  async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findByUsername(username);
-    if (user?.password !== password) {
-      throw new UnauthorizedException();
-    }
-    const payload = { sub: user.userId, username: user.username };
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-    };
+    if (!user) throw new BadRequestException('Пользователь не найден');
+
+    if (user && user.password === pass) {
+      const { password, ...result } = user;
+      return result;
+    } //вернули всё, кроме пароля
+    return null;
   }
 
   async register(dto: CreateUserDto) {
     try {
       const userData = await this.usersService.create(dto);
+      const payload = {
+        id: userData.userId,
+        role: userData.role,
+      };
       return {
-        token: this.jwtService.sign({ id: userData.userId }),
+        token: this.jwtService.sign(payload),
       };
     } catch (err) {
       throw new ForbiddenException(err.message);
@@ -38,8 +43,12 @@ export class AuthService {
   }
 
   async login(user: UserEntity) {
+    const payload = {
+      id: user.userId,
+      role: user.role,
+    };
     return {
-      token: this.jwtService.sign({ id: user.userId }),
+      access_token: this.jwtService.sign(payload),
     };
   }
 }

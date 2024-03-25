@@ -9,8 +9,4 @@ export class CreateUserDto {
   @IsString()
   @ApiProperty({ default: '123' })
   password: string;
-
-  @IsString()
-  @ApiProperty({ default: 'imgramgim@gmail.com' })
-  email: string;
 }

@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Cart } from 'src/mods_cart/entities/cart.entity';
+// import { Role } from 'src/auth/decorators/roles.enum';
 
 @Entity('users')
 export class UserEntity {
@@ -19,8 +20,8 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @Column()
-  email: string;
+  @Column({ default: 'user' })
+  role: string;
 
   @OneToOne(() => Cart, (cart) => cart.user)
   cart: Cart;

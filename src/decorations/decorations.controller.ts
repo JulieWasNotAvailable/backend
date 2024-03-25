@@ -8,20 +8,27 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  UseGuards,
 } from '@nestjs/common';
 import { DecorationService } from './decorations.service';
 import { CreateDecorationDto } from './dto/create-decoration.dto';
 import { UpdateDecorationDto } from './dto/update-decoration.dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileStorage } from './storage';
 import { DecorationEntity } from './entities/decoration.entity';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
+@ApiBearerAuth()
 @ApiTags('decorations')
 @Controller('decorations')
 export class DecorationsController {
   constructor(private readonly decorationsService: DecorationService) {}
 
+  @UseGuards(JwtAuthGuard, RolesGuard) //:)
+  @Roles(['admin']) //Role['admin'] - string datatype with the value admin
   @Post()
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('image', { storage: fileStorage }))
