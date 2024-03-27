@@ -41,7 +41,7 @@ export class ModsService {
     return this.repository.save(toUpdate);
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.repository.delete({ id });
   }
 }

@@ -24,6 +24,12 @@ export class CartService {
   }
 
   async addModToCart(dto: AddModToCartDto, userId: number) {
+    console.log('inside AddModDto: ', dto);
+    console.log('userId: ', userId);
+    console.log(
+      'this.userService.findById(userId): ',
+      this.userService.findById(userId),
+    );
     const userCart = await this.cartRepository.findOne({
       relations: {
         cartItems: {
@@ -31,11 +37,13 @@ export class CartService {
         },
       },
       where: {
-        user: Equal(await this.userService.findById(userId)),
+        user: Equal(userId),
       },
     });
+    console.log('userCart: ', userCart);
     //If cart is null create new cart for user
     if (userCart == null) {
+      console.log('userCart: ', userCart);
       const cart = this.cartRepository.create({
         user: await this.userService.findById(userId),
       });
@@ -45,6 +53,7 @@ export class CartService {
         Quantity: dto.quantity,
         cart: cart,
       });
+      console.log('cartItem: ', cartItem);
       await this.cartItemRepository.save(cartItem);
     }
     const mod = await this.modService.findOne(dto.modId);

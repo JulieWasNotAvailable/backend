@@ -20,12 +20,12 @@ export class Cart {
   @OneToMany(() => CartItem, (cartItem) => cartItem.cart)
   cartItems: CartItem[];
 
-  getTotalPrice() {
-    if (this.cartItems == null) {
-      return 0;
-    }
-    let sum = 0;
-    this.cartItems.forEach((a) => (sum += a.mod.price));
-    return sum;
-  }
+  // getTotalPrice() {
+  //   if (this.cartItems == null) {
+  //     return 0;
+  //   }
+  //   let sum = 0;
+  //   this.cartItems.forEach((a) => (sum += a.mod.price));
+  //   return sum;
+  // }
 }

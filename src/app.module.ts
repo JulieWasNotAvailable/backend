@@ -27,7 +27,6 @@ import { CartModule } from './mods_cart/mods_cart.module';
     AuthModule,
     ModsModule,
     CartModule,
-    // HelpModule,
   ],
   controllers: [],
   providers: [],
