@@ -39,13 +39,11 @@ export class KitchensController {
     return this.kitchensService.create(dto, image);
   }
 
-  @Roles(['admin', 'user'])
   @Get()
   findAll() {
     return this.kitchensService.findAll();
   }
 
-  @Roles(['admin', 'user'])
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.kitchensService.findOne(+id);

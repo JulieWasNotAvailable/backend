@@ -39,13 +39,11 @@ export class DecorationsController {
     return this.decorationsService.create(dto, image);
   }
 
-  @Roles(['user', 'admin'])
   @Get()
   findAll() {
     return this.decorationsService.findAll();
   }
 
-  @Roles(['user', 'admin'])
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.decorationsService.findOne(+id);
