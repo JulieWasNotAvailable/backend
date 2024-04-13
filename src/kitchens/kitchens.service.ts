@@ -43,7 +43,7 @@ export class KitchensService {
       throw new BadRequestException(`Запись с id=${id} не найдена`);
     }
     if (dto.title) {
-      toUpdate.title = dto.title; //если пользователь тыкает на изменить title field, данные направляются сюда
+      toUpdate.title = dto.title;
     }
     if (image) {
       if (toUpdate.image !== image.filename) {

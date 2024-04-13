@@ -1,7 +1,7 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { CartItem } from 'src/mods_cart/entities/cart.item.entity';
 
-@Entity('mod')
+// @Entity('mod')
 export class ModEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -12,6 +12,6 @@ export class ModEntity {
   @Column({ default: '200x300x400мм' })
   size: string;
 
-  @OneToOne(() => CartItem, (cartItem) => cartItem.mod)
-  cartItem: CartItem;
+  // @OneToMany(() => CartItem, (cartItem) => cartItem.mod)
+  // cartItem: CartItem;
 }

@@ -1,7 +1,4 @@
 export class ItemDTO {
+  kitchenId: number;
   quantity: number;
-  modId: number;
-  price: number;
-  cartId: number;
-  subTotalPrice: number;
 }

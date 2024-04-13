@@ -1,4 +1,5 @@
 import { DecorationEntity } from 'src/decorations/entities/decoration.entity';
+import { CartItem } from 'src/mods_cart/entities/cart.item.entity';
 import {
   Column,
   Entity,
@@ -6,6 +7,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity('kitchen')
@@ -51,4 +53,7 @@ export class KitchenEntity {
 
   @CreateDateColumn({ type: 'timestamp' })
   createdDate: Date;
+
+  @OneToMany(() => CartItem, (cartItem) => cartItem.kitchen)
+  cartItem: CartItem;
 }

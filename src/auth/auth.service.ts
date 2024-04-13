@@ -30,7 +30,7 @@ export class AuthService {
     try {
       const userData = await this.usersService.create(dto);
       const payload = {
-        id: userData.userId,
+        id: userData.Id,
         role: userData.role,
       };
       return {
@@ -43,7 +43,7 @@ export class AuthService {
 
   async login(user: UserEntity) {
     const payload = {
-      id: user.userId,
+      id: user.Id,
       role: user.role,
     };
     return {

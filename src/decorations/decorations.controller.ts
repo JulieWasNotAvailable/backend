@@ -21,13 +21,13 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiTags('decorations')
 @Controller('decorations')
 export class DecorationsController {
   constructor(private readonly decorationsService: DecorationService) {}
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiBearerAuth()
   @Roles(['admin'])
   @Post()
   @ApiConsumes('multipart/form-data')
@@ -49,6 +49,8 @@ export class DecorationsController {
     return this.decorationsService.findOne(+id);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiBearerAuth()
   @Roles(['admin'])
   @Patch(':id')
   @ApiConsumes('multipart/form-data')
@@ -61,6 +63,8 @@ export class DecorationsController {
     return this.decorationsService.update(+id, dto, image);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiBearerAuth()
   @Roles(['admin'])
   @Delete(':id')
   delete(@Param('id') id: string) {

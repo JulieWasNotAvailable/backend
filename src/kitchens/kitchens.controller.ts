@@ -21,13 +21,13 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiTags('kitchens')
 @Controller('kitchens')
 export class KitchensController {
   constructor(private readonly kitchensService: KitchensService) {}
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(['admin'])
   @Post()
   @ApiConsumes('multipart/form-data')
@@ -49,6 +49,8 @@ export class KitchensController {
     return this.kitchensService.findOne(+id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(['admin'])
   @Patch(':id')
   @ApiConsumes('multipart/form-data')
@@ -61,6 +63,8 @@ export class KitchensController {
     return this.kitchensService.update(+id, dto, image);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(['admin'])
   @Delete(':id')
   remove(@Param('id') id: string) {

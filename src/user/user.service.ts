@@ -27,10 +27,10 @@ export class UsersService {
     });
   }
 
-  async updatePass(userId: number, dto: UpdateUserDto) {
-    const userToUpdate = await this.repository.findOneBy({ userId });
+  async updatePass(Id: number, dto: UpdateUserDto) {
+    const userToUpdate = await this.repository.findOneBy({ Id });
     if (!userToUpdate) {
-      throw new BadRequestException(`Запись с id=${userId} не найдена`);
+      throw new BadRequestException(`Запись с id=${Id} не найдена`);
     }
     if (userToUpdate.password !== dto.oldpass) {
       throw new BadRequestException('Пароли не совпадают');
@@ -45,11 +45,11 @@ export class UsersService {
     return this.repository.findOneBy({ username });
   }
 
-  async findById(userId: number) {
-    return this.repository.findOneBy({ userId });
+  async findById(Id: number) {
+    return this.repository.findOneBy({ Id });
   }
 
-  async delete(userId: number) {
-    return this.repository.delete(userId);
+  async delete(Id: number) {
+    return this.repository.delete(Id);
   }
 }

@@ -26,6 +26,7 @@ export class UsersController {
   @Roles(['admin', 'user'])
   @Get('me')
   findById(@UserId() id: number) {
+    console.log('userId from getme: ', id);
     return this.usersService.findById(id);
   }
 

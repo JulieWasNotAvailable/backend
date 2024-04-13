@@ -12,7 +12,7 @@ import { Cart } from 'src/mods_cart/entities/cart.entity';
 @Entity('users')
 export class UserEntity {
   @PrimaryGeneratedColumn()
-  userId: number;
+  Id: number;
 
   @Column()
   username: string;

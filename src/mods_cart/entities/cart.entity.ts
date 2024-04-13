@@ -1,4 +1,5 @@
 import {
+  Column,
   Entity,
   JoinColumn,
   OneToMany,
@@ -13,6 +14,9 @@ export class Cart {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  userId: number;
+
   @OneToOne(() => UserEntity, (user) => user.cart)
   @JoinColumn()
   user: UserEntity;
@@ -20,12 +24,6 @@ export class Cart {
   @OneToMany(() => CartItem, (cartItem) => cartItem.cart)
   cartItems: CartItem[];
 
-  // getTotalPrice() {
-  //   if (this.cartItems == null) {
-  //     return 0;
-  //   }
-  //   let sum = 0;
-  //   this.cartItems.forEach((a) => (sum += a.mod.price));
-  //   return sum;
-  // }
+  @Column({ default: 0 })
+  totalPrice: number;
 }

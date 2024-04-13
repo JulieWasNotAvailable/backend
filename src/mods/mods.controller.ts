@@ -29,13 +29,11 @@ export class ModsController {
     return this.modsService.create(createModDto);
   }
 
-  @Roles(['admin', 'user'])
   @Get()
   findAll() {
     return this.modsService.findAll();
   }
 
-  @Roles(['admin', 'user'])
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.modsService.findOne(+id);
@@ -50,6 +48,6 @@ export class ModsController {
   @Roles(['admin'])
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.modsService.remove(+id);
+    return this.modsService.delete(+id);
   }
 }

@@ -10,5 +10,6 @@ import { KitchenEntity } from './entities/kitchen.entity';
   imports: [ConfigModule, TypeOrmModule.forFeature([KitchenEntity])],
   controllers: [KitchensController],
   providers: [KitchensService],
+  exports: [KitchensService],
 })
 export class KitchensModule {}
