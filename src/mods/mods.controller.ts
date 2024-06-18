@@ -16,13 +16,13 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiTags('mods')
 @Controller('mods')
 export class ModsController {
   constructor(private readonly modsService: ModsService) {}
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(['admin'])
   @Post()
   create(@Body() createModDto: CreateModDto) {
@@ -39,6 +39,8 @@ export class ModsController {
     return this.modsService.findOne(+id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(['admin'])
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateModDto: UpdateModDto) {

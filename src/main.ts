@@ -10,7 +10,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('School X - OpenAPI 3.0')
+    .setTitle('Kitchens store OpenAPI 3.0')
     .setDescription(
       `[The source API definition (json)](http://${process.env.SERVER}:${process.env.PORT}/api-json)`,
     )
@@ -23,6 +23,12 @@ async function bootstrap() {
   const port = parseInt(process.env.PORT);
   console.log('port = ', process.env.PORT);
   const server = process.env.SERVER;
+
+  app.enableCors({
+    origin: ['http://localhost:3000', 'http://localhost:3000/testpage'],
+    allowedHeaders: ['content-type'],
+  });
+
   await app.listen(port, server);
 
   console.log(`Application is running on: ${await app.getUrl()}`);

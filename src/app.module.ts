@@ -9,7 +9,6 @@ import { UsersModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ModsModule } from './mods/mods.module';
 import { CartModule } from './mods_cart/mods_cart.module';
-// import { HelpModule } from './help/help.module';
 
 @Module({
   imports: [

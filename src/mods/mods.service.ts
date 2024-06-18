@@ -20,7 +20,7 @@ export class ModsService {
   }
 
   async findAll() {
-    return this.repository.find;
+    return this.repository.find();
   }
 
   async findOne(id: number) {

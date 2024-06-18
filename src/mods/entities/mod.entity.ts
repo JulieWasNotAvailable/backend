@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { CartItem } from 'src/mods_cart/entities/cart.item.entity';
 
-// @Entity('mod')
+@Entity('mod')
 export class ModEntity {
   @PrimaryGeneratedColumn()
   id: number;
