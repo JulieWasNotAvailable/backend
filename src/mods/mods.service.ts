@@ -1,16 +1,24 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { CreateModDto } from './dto/create-mod.dto';
 import { UpdateModDto } from './dto/update-mod.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ModEntity } from './entities/mod.entity';
 import { Repository } from 'typeorm';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ModsService {
   constructor(
     @InjectRepository(ModEntity)
     private repository: Repository<ModEntity>,
+    private configService: ConfigService,
   ) {}
+  private readonly logger = new Logger(ModsService.name);
+
+  async getHello(): Promise<string> {
+    this.logger.log(this.configService.get('APP_NAME'));
+    return 'Hello World';
+  }
 
   async create(dto: CreateModDto): Promise<ModEntity> {
     return this.repository.save({

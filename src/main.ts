@@ -6,7 +6,6 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
     .addBearerAuth()
@@ -25,10 +24,11 @@ async function bootstrap() {
   const server = process.env.SERVER;
 
   app.enableCors({
-    origin: ['http://localhost:3000', 'http://localhost:3000/testpage'],
-    allowedHeaders: ['content-type'],
+    origin: 'http://localhost:3000',
+    allowedHeaders: ['Content-Type', 'Accept'],
   });
 
+  // app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(port, server);
 
   console.log(`Application is running on: ${await app.getUrl()}`);

@@ -9,6 +9,7 @@ import {
   UseInterceptors,
   UploadedFile,
   UseGuards,
+  Response
 } from '@nestjs/common';
 import { KitchensService } from './kitchens.service';
 import { CreateKitchenDto } from './dto/create-kitchen.dto';
@@ -47,6 +48,11 @@ export class KitchensController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.kitchensService.findOne(+id);
+  }
+
+  @Get('/db_images/:path')
+  download(@Param('path') path: string, @Response() response) {
+    return response.sendFile(path, { root: './db_images/kitchen' });
   }
 
   @ApiBearerAuth()

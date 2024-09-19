@@ -1,10 +1,12 @@
+/* eslint-disable prettier/prettier */
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateKitchenDto } from './dto/create-kitchen.dto';
 import { UpdateKitchenDto } from './dto/update-kitchen.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { KitchenEntity } from './entities/kitchen.entity';
 import { Repository } from 'typeorm';
-import * as fs from 'fs';
+import { Buffer } from 'buffer';
+import * as fs from 'fs'
 
 @Injectable()
 export class KitchensService {

@@ -30,6 +30,10 @@ export class ModsController {
   }
 
   @Get()
+  getHello() {
+    return this.modsService.getHello();
+  }
+  @Get()
   findAll() {
     return this.modsService.findAll();
   }
